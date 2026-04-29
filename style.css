@@ -25,13 +25,13 @@ a:link {
 }
 
 a:visited {
-  color: black;
+  color: white;
   background-color: transparent;
   text-decoration: none;
 }
 
 a:hover {
-  color: red;
+  color: white;
   background-color: transparent;
   text-decoration: underline;
 }
