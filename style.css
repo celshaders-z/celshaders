@@ -2,6 +2,7 @@
 .Post { background-color: lightgrey; width: 700px; border: 2px solid black; padding: 5px; margin: 20px; margin-left:200px; }
 .Banner { width:1228px; border:0px; padding: 0px; margin-left:200px}
 .Sidebarbuttons { background-color: darkblue; width: 200px; border:2px white; margin-bottom: 2px; margin-top:2px; }
+.Topbar { background-color: lightblue; width: 100%; border:1px black; }
 .sidenav {
   height: 100%;      
   width: 200px;      
