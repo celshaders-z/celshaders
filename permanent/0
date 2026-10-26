@@ -45,6 +45,21 @@ a:hover {
       <div class="Post">
 Welcome to the comments page! 
       </div>
+<script src="https://giscus.app/client.js"
+        data-repo="celshaders-z/celshaders"
+        data-repo-id="R_kgDOSJ3BCA"
+        data-category="Comments"
+        data-category-id="DIC_kwDOSJ3BCM4DJsFD"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="noborder_light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
 
   
 </div>
