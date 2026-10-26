@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>04/30/2026 - celshaders.com</title>
+    <link rel="stylesheet" href=".././style.css">
+    <link rel="icon" href="../celshaders.ico" type="../image/x-icon">
+    <style>
+a:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  background-color: transparent;
+  text-decoration: underline;
+}
+</style>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  </head>
+  <body>
+    <aside class="sidenav">
+      <img src="../images/cscomlogo.webp" title="maybe true wait who are you" width="180" height="180"><br>
+ <div class="Sidebarbuttons">  <a href="../index"> Home</a></div>
+ <div class="Sidebarbuttons"> <a href="../AboutMe"> About Me</a> </div>
+ <div class="Sidebarbuttons"> <a href="https://Youtube.com/@celshaders"> Youtube</a> </div>
+ <div class="Sidebarbuttons"> <a href="https://github.com/celshaders-z"> Github</a> </div>
+ <div class="Sidebarbuttons"> <a href="../feed"> Rss feed</a> </div>
+ <div class="Sidebarbuttons"> <a href="../Contact"> Contact</a> </div>
+</aside>
+    <main>
+      <div class="Topbar"> =-=-=</div>
+     <div class="Banner"><img src="../images/Cscombanner.webp" title="Why do you feel the need to hover over this?" width="500" height="83"></div> 
+    
+      <div class="Date">April 20th 2026</div>
+      <div class="Post">I'm taking my balls and leaving!<br> 
+I'm taking my balls and leaving!<br>When talking to others about internet history it's odd how often people are surprised
+        by how vulgar "citizens" were. I was talking with one of my friends about WWWW1, (<a href="https://www.youtube.com/watch?v=oL4oK6ylNns&t=1095s" style="color: blue;">World Wide Web War 1</a>) and he wondered how people could
+      get so worked up over a bit of internet drama. And I do understand, because nowdays there's new drama every day and we've become desensitized
+        to the constant barage of bullshit.
+      </div>
+
+</div>
+
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
