@@ -9,35 +9,57 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: rss-feed
+  cancel-in-progress: false
+
 jobs:
   feed:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
 
       - name: Generate feed.xml
         run: |
+          if [ "$(git rev-parse --is-shallow-repository)" = "true" ]; then git fetch --unshallow; fi
           python3 - <<'PY'
-          import re, html
-          from datetime import datetime, timezone
+          import re, html, subprocess
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
           from email.utils import format_datetime
 
           SITE = "https://celshaders.com/"
+          PST = ZoneInfo("America/Los_Angeles")
           page = open("index.html", encoding="utf-8").read()
 
-          # every <div class="Date">...</div> followed by <div class="Post">...</div>
+          def commit_time(date):
+              """Time (Pacific) of the oldest commit that added this post's date line."""
+              out = subprocess.run(
+                  ["git", "log", f'-S<div class="Date">{date}</div>', "--reverse",
+                   "--format=%aI", "--", "index.html"],
+                  capture_output=True, text=True,
+              ).stdout.strip().splitlines()
+              return datetime.fromisoformat(out[0]).astimezone(PST) if out else None
+
           posts = re.findall(r'<div class="Date">(.*?)</div>\s*<div class="Post">(.*?)</div>', page, re.S)
 
           items = ""
           for date, post in posts:
-              month, day, year = re.sub(r"(st|nd|rd|th)", "", date.strip()).split()
-              when = datetime.strptime(f"{month[:3]} {day} {year}", "%b %d %Y").replace(hour=12, tzinfo=timezone.utc)
+              date = date.strip()
+              month, day, year = re.sub(r"(st|nd|rd|th)", "", date).split()
+              written = datetime.strptime(f"{month[:3]} {day} {year}", "%b %d %Y")
               title, _, body = post.partition("<br>")
-              body = re.sub(r'(href|src)="(?!https?://)/?', rf'\1="{SITE}', body)  # make links absolute
+              title = title.strip()
+              body = re.sub(r'(href|src)="(?!https?://)/?', rf'\1="{SITE}', body)
+
+              when = commit_time(date) or datetime.now(PST)
+
               items += f"""<item>
-          <title>{html.escape(title.strip())}</title>
+          <title>{html.escape(title)}</title>
           <link>{SITE}</link>
-          <guid isPermaLink="false">{when.date()}-{html.escape(title.strip())}</guid>
+          <guid isPermaLink="false">{written.date()}-{html.escape(title)}</guid>
           <pubDate>{format_datetime(when)}</pubDate>
           <description><![CDATA[{body.strip()}]]></description>
           </item>
@@ -59,4 +81,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add feed.xml
-          git diff --cached --quiet || (git commit -m "Update RSS feed" && git push)
+          git diff --cached --quiet || (git commit -m "Update RSS feed" && git pull --rebase && git push)
